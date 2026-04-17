@@ -22,6 +22,9 @@
 </head>
 
 <body>
+    <div id="countdown">
+    <span id="countText">1</span>
+</div>
     <div id="wrapper">
         <div class="flag__birthday">
             <img src="./images/1.png" alt="" width="350" class="flag__left">
@@ -266,6 +269,32 @@ mailBox.onclick = function () {
     close.addEventListener('click', function () {
         boxmail.classList.remove('active')
     })
+
+    let count = 1;
+let countText = document.getElementById("countText");
+let countdown = document.getElementById("countdown");
+
+// sembunyikan isi web dulu
+document.getElementById("wrapper").style.display = "none";
+
+let interval = setInterval(() => {
+    countText.textContent = count;
+    countText.style.animation = "none";
+    void countText.offsetWidth; // reset animasi
+    countText.style.animation = "zoom 0.8s ease";
+
+    count++;
+
+    if (count > 3) {
+        clearInterval(interval);
+
+        // hilangkan countdown
+        countdown.style.display = "none";
+
+        // tampilkan isi web
+        document.getElementById("wrapper").style.display = "block";
+    }
+}, 1000);
 </script>
 
 </html>
