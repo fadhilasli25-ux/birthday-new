@@ -16,6 +16,11 @@
         rel="stylesheet">
     <script src="https://code.jquery.com/jquery-3.7.1.min.js"
         integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo=" crossorigin="anonymous"></script>
+    
+    <audio id="count-sound">
+    <source src="count.mp3" type="audio/mpeg">
+</audio>
+
     <audio id="bg-music" loop>
     <source src="lagunya.mpeg" type="audio/mpeg">
 </audio>
@@ -23,7 +28,7 @@
 
 <body>
     <div id="countdown">
-    <span id="countText">1</span>
+    <span id="countText">3</span>
 </div>
     <div id="wrapper">
         <div class="flag__birthday">
@@ -270,22 +275,44 @@ mailBox.onclick = function () {
         boxmail.classList.remove('active')
     })
 
-    let count = 1;
+  let count = 3;
 let countText = document.getElementById("countText");
 let countdown = document.getElementById("countdown");
+let wrapper = document.getElementById("wrapper");
+
+let countSound = document.getElementById("count-sound");
+let music = document.getElementById("bg-music");
 
 // sembunyikan isi web dulu
-document.getElementById("wrapper").style.display = "none";
+wrapper.style.display = "none";
 
 let interval = setInterval(() => {
     countText.textContent = count;
+
+    // animasi ulang
     countText.style.animation = "none";
-    void countText.offsetWidth; // reset animasi
+    void countText.offsetWidth;
     countText.style.animation = "zoom 0.8s ease";
 
-    count++;
+    // bunyi tiap angka
+    countSound.currentTime = 0;
+    countSound.play();
 
-    if (count > 3) {
+    count--;
+
+    if (count < 1) {
+        clearInterval(interval);
+
+        setTimeout(() => {
+            countdown.style.display = "none";
+            wrapper.style.display = "block";
+
+            // 🎵 langsung play lagu ulang tahun
+            music.volume = 0.5;
+            music.play();
+        }, 800);
+    }
+}, 1000);
         clearInterval(interval);
 
         // hilangkan countdown
