@@ -16,6 +16,9 @@
         rel="stylesheet">
     <script src="https://code.jquery.com/jquery-3.7.1.min.js"
         integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo=" crossorigin="anonymous"></script>
+    <audio id="bg-music" loop>
+    <source src="lagunya.mpeg" type="audio/mpeg">
+</audio>
 </head>
 
 <body>
@@ -250,10 +253,15 @@
     let mailBox = document.querySelector('.mail')
     let boxmail = document.querySelector('.boxMail')
     var close = document.querySelector('.fa-xmark')
-    mailBox.onclick = function () {
-        mailBox.classList.toggle('active')
-        boxmail.classList.add('active')
-    }
+    let music = document.getElementById("bg-music");
+
+mailBox.onclick = function () {
+    mailBox.classList.toggle('active')
+    boxmail.classList.add('active')
+
+    music.play(); // ▶️ musik langsung jalan
+    music.volume = 0.5;
+}
 
     close.addEventListener('click', function () {
         boxmail.classList.remove('active')
